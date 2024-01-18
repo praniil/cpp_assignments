@@ -45,6 +45,7 @@ void GoldInt::conversion(GoldNep obj) {
 int main(){
     GoldInt g1(25);
     GoldNep tola1(25);
+    GoldInt g2;
     g1.conversion(tola1);
     g1.display();
     

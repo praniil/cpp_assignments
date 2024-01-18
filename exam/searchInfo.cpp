@@ -1,47 +1,69 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
 using namespace std;
 
-class Employee{
-    public:
+class Employee {
+public:
     string name;
-    int phoneNumber;
+    int roll_no;
 
-    void setInformation(){
+    void setInformation() {
         cout << "enter the name: ";
-        cin >> name;
-        cout << "enter the phoneNumber";
-        cin >> phoneNumber;
-    }
-    void getInformation(){
-        cout << "name: " << name;
-        cout << "phoneNumber: " << phoneNumber;
+        cin.ignore();
+        getline(cin, name);
+        cout << "enter the roll: ";
+        cin >> roll_no;
     }
 
-    string searchInformation(string info){
-        
+    void getInformation() {
+        cout << "name: " << name << endl;
+        cout << "roll_no: " << roll_no << endl;
     }
-
 };
 
-int main(){
-    Employee emp[4];
-    fstream file;
-
-    file.open("informationOfEmployee.dat" , ios :: out | ios::binary);
-    cout << "enter info: " << endl;
-    for(int i=0 ; i< 4; i++){
+int main() {
+    Employee emp[2];
+    ofstream out("sample.txt");
+    if (!out) {
+        cerr << "Error opening file." << endl;
+        return 1; // Exit with an error code
+    }
+    for (int i = 0; i < 2; i++) {
         emp[i].setInformation();
-        file.write(reinterpret_cast<char*>(&emp[i].name), sizeof(emp[i]));
+        out << emp[i].name << endl << emp[i].roll_no << endl;
     }
-    file.close();
+    out.close();
 
-    file.open("informationOfEmployee.dat", ios :: in | ios::binary);
-    cout << "information of file: " << endl;
-    for(int i=0; i<4; i++){
-        file.read(reinterpret_cast<char*>(&emp[i]), sizeof(emp[i]));
-        emp[i].getInformation();
+    ifstream in("sample.txt");
+    if (!in) {
+        cerr << "Error opening file" << endl;
+        return 1; // Exit with an error code
     }
-    file.close();
-    
+
+    string searchName;
+    cout << "enter the name you want to search: ";
+    cin.ignore(); // Clear the newline left by previous input
+    getline(cin, searchName);
+
+    bool found = false;
+    for (int i = 0; i < 2; i++) {
+        getline(in, emp[i].name);
+        in >> emp[i].roll_no;
+        in.ignore();
+        if (searchName == emp[i].name) {
+            cout << "employee found" << endl;
+            cout << "Name: " << emp[i].name << endl;
+            cout << "Roll No: " << emp[i].roll_no << endl;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "employee not found" << endl;
+    }
+
+    in.close();
+
+    return 0;
 }

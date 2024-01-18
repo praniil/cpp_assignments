@@ -23,4 +23,5 @@ int main(){
     Complex c2(6, 7);
     Complex c3(6, 7);
     cout << c1.dispalyCount();
+    cout << Complex :: dispalyCount();
 }
