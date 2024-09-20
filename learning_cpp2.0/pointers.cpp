@@ -6,7 +6,7 @@ int myFunction (int value) {
 }
 
 int main() {
-    //regular pointers
+    //1. regular pointers
     char c = 'a';
     char* p = &c;   
     std::cout << "p: " << p << std::endl;
@@ -15,11 +15,11 @@ int main() {
     char** ppc = &p;
     std::cout << "ppc" << ppc << std::endl;
 
-    //null pointer not pointing to any valid memeory location
+    //2. null pointer not pointing to any valid memeory location
     int* pointer = nullptr;
     // std::cout << "null pointer" << *pointer << std::endl;
 
-    //void pointer = Generic pointer, can point to data of any data type
+    //3. void pointer = Generic pointer, can point to data of any data type
     //we cannot dereference a void pointer without type casting
 
     int a = 10;
@@ -40,7 +40,7 @@ int main() {
             std::cout << "value of a is: " << *ptr << std::endl;
     */
 
-   //pointer to pointer
+   //4. pointer to pointer
    int x = 30;
    int* pointerInt = &x;
    int** pointerToPointerInt = &pointerInt;
@@ -52,11 +52,20 @@ int main() {
 
    std::cout << "normal size: " << normalPointerSize << "\n" << "pointer to pointer size: " << pointerToPointerSize << std::endl;
 
-   //function pointer: call a function by its pointer
+   //5. function pointer: call a function by its pointer
    //function pointer points to the code not data
    //a function pointer stores the start of executable code 
     int (*funcPointer)(int) = myFunction;
-    funcPointer(5);
+    (*funcPointer)(5);
+
+    //6. array pointers
+    int array[4] {1, 2, 3, 4};
+    //array name is itself a pointer to the first element of an array
+    int* ptrArr = array;
+    std::cout << "first element: " << *array << std::endl;
+    std::cout << "first element: " << *ptrArr << std::endl;
+    std::cout << "first element address: " << array << std::endl;
+    std::cout << "first element address: " << ptrArr << std::endl;
 
     return 0;
 }
