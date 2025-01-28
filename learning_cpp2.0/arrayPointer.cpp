@@ -18,6 +18,7 @@ void traaverseCopy(std::array<int, 5> array) {
 int main() {
     int array[5] = {3, 3, 3, 4, 5};
     int* arrayPointer = array;
+    std::cout << *array << std::endl;
     //traverse
     for (int i= 0; i < 5; i++) {
         std::cout << *arrayPointer++ << std::endl;

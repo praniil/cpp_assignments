@@ -59,4 +59,6 @@ int main() {
 
     delete pointer1;
     std::cout << pointer1->c<< std::endl;
+
+    std::cout << p3->b << std::endl;
 }
